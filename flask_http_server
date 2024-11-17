@@ -1,0 +1,45 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+
+# Endpoint for Thor's location
+@app.route('/thor', methods=['POST'])
+def thor_endpoint():
+    if request.method == 'POST':
+        data = request.json
+        print("Received POST data for Thor:", data)
+
+        # Log the data to Thor's file in the requested format
+        with open('/home/localadm/thor_location.txt', 'w') as f:
+            f.write(f"{data['identifier']}: {data['latitude']}, {data['longitude']}\n")
+
+        return {"message": "Thor's location received and logged"}, 200
+
+# Endpoint for Mira's location
+@app.route('/mira', methods=['POST'])
+def mira_endpoint():
+    if request.method == 'POST':
+        data = request.json
+        print("Received POST data for Mira:", data)
+
+        # Log the data to Mira's file in the requested format
+        with open('/home/localadm/mira_location.txt', 'w') as f:
+            f.write(f"{data['identifier']}: {data['latitude']}, {data['longitude']}\n")
+
+        return {"message": "Mira's location received and logged"}, 200
+
+# Endpoint for Stefan's location
+@app.route('/stefan', methods=['POST'])
+def stefan_endpoint():
+    if request.method == 'POST':
+        data = request.json
+        print("Received POST data for Stefan:", data)
+
+        # Log the data to Stefan's file in the requested format
+        with open('/home/localadm/stefan_location.txt', 'w') as f:
+            f.write(f"{data['identifier']}: {data['latitude']}, {data['longitude']}\n")
+
+        return {"message": "Stefan's location received and logged"}, 200
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)  # Debug mode enabled and accessible externally
